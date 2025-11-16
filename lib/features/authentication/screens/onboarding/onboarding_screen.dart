@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grocery_app/common/widgets/elevated_button.dart';
+import 'package:grocery_app/common/widgets/button/elevated_button.dart';
 import 'package:grocery_app/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:grocery_app/features/authentication/screens/onboarding/widget/onboarding.dart';
 import 'package:grocery_app/utils/constants/constants.dart';
 import 'package:grocery_app/utils/constants/texts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/device_helpers.dart';
 
