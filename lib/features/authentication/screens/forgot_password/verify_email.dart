@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:grocery_app/features/authentication/screens/forgot_password/account_created.dart';
-
 import '../../../../common/style/padding.dart';
 import '../../../../common/widgets/button/elevated_button.dart';
 import '../../../../utils/constants/constants.dart';
