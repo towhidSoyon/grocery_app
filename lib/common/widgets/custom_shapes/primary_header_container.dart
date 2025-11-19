@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
-import '../../../../../common/widgets/custom_shapes/rounded_edges_container.dart';
-import '../../../../../utils/constants/colors.dart';
+import 'rounded_edges_container.dart';
+import '../../../utils/constants/colors.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {
   final Widget child;

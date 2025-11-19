@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:grocery_app/utils/helpers/helper_functions.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/sizes.dart';
+import '../custom_shapes/rounded_container.dart';
+import 'brand_card.dart';
+
+class UBrandShowcase extends StatelessWidget {
+  final List<String> image;
+
+  const UBrandShowcase({super.key, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = UHelperFunctions.isDarkMode(context);
+    return URoundedContainer(
+      showBorder: true,
+      borderColor: UColors.darkGrey,
+      backgroundColor: Colors.transparent,
+      padding: EdgeInsets.all(USizes.md),
+      margin: EdgeInsets.only(bottom: USizes.spaceBtwItems),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          UBrandCard(showBorder: false),
+
+          Row(
+            children: image
+                .map((image) => buildBrandImage(dark, image))
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildBrandImage(bool dark, String image) {
+    return Expanded(
+      child: URoundedContainer(
+        height: 100,
+        margin: EdgeInsets.only(right: USizes.sm),
+        padding: EdgeInsets.all(USizes.md),
+        backgroundColor: dark ? UColors.darkGrey : UColors.light,
+        child: Image(image: AssetImage(image), fit: BoxFit.contain),
+      ),
+    );
+  }
+}

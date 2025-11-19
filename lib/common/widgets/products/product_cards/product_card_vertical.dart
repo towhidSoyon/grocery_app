@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:grocery_app/common/widgets/custom_shapes/rounded_container.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 
+import '../../../../features/shop/screens/product_details/product_details.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../button/add_to_cart_button.dart';

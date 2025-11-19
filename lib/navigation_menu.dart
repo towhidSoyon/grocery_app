@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:grocery_app/utils/constants/colors.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
-import 'features/shop/screens/profile/profile_screen.dart';
+import 'features/personalization/screens/profile/profile_screen.dart';
 import 'features/shop/screens/home/home_screen.dart';
 import 'features/shop/screens/wishlist/wishlist_screen.dart';
 
