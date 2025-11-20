@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/controllers/product/favourite_controller.dart';
 import '../../icons/circular_icon.dart';
 
 class UFavouriteIcon extends StatelessWidget {

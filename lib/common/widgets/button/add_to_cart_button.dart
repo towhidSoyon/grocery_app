@@ -3,7 +3,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../features/shop/controllers/product/cart_controller.dart';
+import '../../../features/shop/models/cart_item_model.dart';
+import '../../../features/shop/models/product_model.dart';
+import '../../../features/shop/screens/product_details/product_details.dart';
 import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/enum.dart';
 import '../../../utils/constants/sizes.dart';
 
 class ProductAddToCartButton extends StatelessWidget {

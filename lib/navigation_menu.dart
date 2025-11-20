@@ -44,5 +44,5 @@ class NavigationController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
 
-  List<Widget> screens = [HomeScreen(), HomeScreen(), WishlistScreen(), ProfileScreen()];
+  List<Widget> screens = [HomeScreen(), HomeScreen(), FavouriteScreen(), ProfileScreen()];
 }

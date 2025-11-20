@@ -13,14 +13,16 @@ import '../../../../common/widgets/products/product_cards/product_card_vertical.
 import '../../../../common/widgets/text_fields/search_bar.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/helpers/helper_functions.dart';
+import '../../controllers/product/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     final dark = UHelperFunctions.isDarkMode(context);
-    final controller = Get.put(HomeController());
+    //final controller = Get.put(HomeController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -69,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: USizes.spaceBtwSections),
 
                   UGridLayout(itemCount: 6, itemBuilder: (context, index){
-                    return UProductCardVertical(product: null);
+                    return UProductCardVertical(product: controller.featuredProducts[index]);
                   })
 
                   //UProductCardVertical()
