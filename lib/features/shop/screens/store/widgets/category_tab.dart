@@ -10,6 +10,7 @@ import '../../../../../utils/constants/constants.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../controllers/category/category_controller.dart';
+import 'category_brands.dart';
 
 class UCategoryTab extends StatelessWidget {
   const UCategoryTab({super.key});

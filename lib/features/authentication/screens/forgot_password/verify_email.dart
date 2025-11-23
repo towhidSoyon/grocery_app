@@ -11,7 +11,8 @@ import '../../../../utils/helpers/device_helpers.dart';
 import '../login/login_screen.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  final String email;
+  const VerifyEmailScreen({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {

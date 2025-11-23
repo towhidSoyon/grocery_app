@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grocery_app/common/widgets/texts/section_heading.dart';
+import 'package:grocery_app/features/personalization/screens/address/address.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_menu_tile.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/setting_menu_tile.dart';
+import 'package:grocery_app/features/shop/screens/order/order.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -30,16 +33,19 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   SettingMenuTile(
+                    onTap: () => Get.to(() => UserAddressScreen()),
                     title: 'My Address',
                     subtitle: 'Set shopping delivery addresses',
                     icon: Iconsax.safe_home,
                   ),
                   SettingMenuTile(
+                    onTap: (){},
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
                     icon: Iconsax.shopping_cart,
                   ),
                   SettingMenuTile(
+                    onTap: () => Get.to(() => OrdersScreen()),
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',
                     icon: Iconsax.bag_tick,

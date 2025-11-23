@@ -8,7 +8,17 @@ import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/device_helpers.dart';
 
 class AccountCreatedScreen extends StatelessWidget {
-  const AccountCreatedScreen({super.key});
+  final String image;
+  final String title, subtitle;
+  final VoidCallback onTap;
+
+  const AccountCreatedScreen({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -9,8 +9,18 @@ class UImages{
   static const String loadingAnimation = 'assets/animations/loading.json';
 
   // animations
-  static const String pencilAnimation = 'assets/animations/pencil_drawing.json';
   static const String cartEmptyAnimation = 'assets/animations/cart_empty.json';
+  static const String productsIllustration = "assets/images/animations/sammy-line-workout.gif";
+  static const String productsSaleIllustration = "assets/images/animations/sammy-line-sale.png";
+  static const String staticSuccessIllustration = "assets/images/animations/sammy-line-success.png";
+  static const String deliveredInPlaneIllustration = "assets/images/animations/sammy-line-come-back-later.png";
+  static const String deliveredEmailIllustration = "assets/images/animations/sammy-line-man-receives-a-mail.png";
+  static const String verifyIllustration = "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
+  static const String docerAnimation = 'assets/images/animations/141594-animation-of-docer.json';
+  static const String pencilAnimation = 'assets/images/animations/140429-pencil-drawing.json';
+  static const String cartAnimation = 'assets/images/animations/lady-adding-product-in-cart-animation.json';
+  static const String orderCompletedAnimation = 'assets/images/animations/order-complete-car-delivery-animation.json';
+
 
   // logos
   static const String facebookIcon = 'assets/logo/facebook-icon.png';

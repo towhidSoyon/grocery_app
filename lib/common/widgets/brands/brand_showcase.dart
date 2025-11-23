@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
+import '../../../features/shop/models/brand_model.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../custom_shapes/rounded_container.dart';
 import 'brand_card.dart';
 
 class UBrandShowcase extends StatelessWidget {
-  final List<String> image;
+  final List<String> images;
+  final BrandModel brand;
 
-  const UBrandShowcase({super.key, required this.image});
+  const UBrandShowcase({super.key, required this.images, required this.brand});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class UBrandShowcase extends StatelessWidget {
           UBrandCard(showBorder: false),
 
           Row(
-            children: image
+            children: images
                 .map((image) => buildBrandImage(dark, image))
                 .toList(),
           ),
