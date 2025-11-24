@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/brands/brand_showcase.dart';
+import '../../../../../common/widgets/shimmer/boxes_shimmer.dart';
+import '../../../../../common/widgets/shimmer/list_tile_shimmer.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../controllers/product/brand_controller.dart';

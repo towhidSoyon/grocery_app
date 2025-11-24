@@ -6,11 +6,17 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../../../common/widgets/loaders/circular_loader.dart';
 import '../../../common/widgets/texts/section_heading.dart';
+import '../../../data/repositories/address/address_repository.dart';
+import '../../../utils/constants/constants.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../utils/helpers/helper_functions.dart';
+import '../../../utils/helpers/network_manager.dart';
+import '../../../utils/popups/full_screen_loader.dart';
 import '../../authentication/models/address_model.dart';
+import '../screens/address/widgets/single_address.dart';
 
 class AddressController extends GetxController{
   static AddressController get instance => Get.find();
@@ -110,7 +116,7 @@ class AddressController extends GetxController{
       selectAddress(address);
 
       // Remove Loader
-      HkFullScreenLoader.stopLoading();
+      UFullScreenLoader.stopLoading();
 
       // show Success message
       UHelperFunctions.successSnackBar(title: 'Congratulations', message: 'Your address has been saved successfully');
@@ -126,7 +132,7 @@ class AddressController extends GetxController{
       Navigator.of(Get.context!).pop();
 
     }catch(e){
-      HkFullScreenLoader.stopLoading();
+      UFullScreenLoader.stopLoading();
       UHelperFunctions.errorSnackBar(title: 'Address not found', message: e.toString());
     }
   }
@@ -151,7 +157,7 @@ class AddressController extends GetxController{
                 return ListView.builder(
                   shrinkWrap: true,
                   itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) => HkSingleAddress(
+                  itemBuilder: (context, index) => USingleAddress(
                     address: snapshot.data![index],
                     onTap: () async{
                       await selectAddress(snapshot.data![index]);

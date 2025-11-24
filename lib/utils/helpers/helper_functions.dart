@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
 
 import '../constants/colors.dart';
 
@@ -69,8 +73,8 @@ class UHelperFunctions{
     }
   }
 
-  /// Function to convert asset to file
-  /*static Future<File> assetToFile(String assetPath) async {
+/*  /// Function to convert asset to file
+  static Future<File> assetToFile(String assetPath) async {
     // Load asset bytes
     final byteData = await rootBundle.load(assetPath);
 
@@ -82,11 +86,11 @@ class UHelperFunctions{
     await file.writeAsBytes(byteData.buffer.asUint8List());
 
     return file;
-  }
+  }*/
 
   static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);
-  }*/
+  }
 
   static customToast({required message}){
     ScaffoldMessenger.of(Get.context!).showSnackBar(
@@ -150,6 +154,14 @@ class UHelperFunctions{
         margin: const EdgeInsets.all(20),
         icon: const Icon(Iconsax.warning_2, color: UColors.white,)
     );
+  }
+
+  static double screenHeight() {
+    return MediaQuery.of(Get.context!).size.height;
+  }
+
+  static double screenWidth() {
+    return MediaQuery.of(Get.context!).size.width;
   }
 
 }

@@ -24,7 +24,7 @@ class UBrandShowcase extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UBrandCard(showBorder: false),
+          UBrandCard(showBorder: false, brand: brand, onTap: () {  },),
 
           Row(
             children: images

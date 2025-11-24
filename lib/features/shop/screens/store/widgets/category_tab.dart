@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../../../../common/widgets/brands/brand_showcase.dart';
 import '../../../../../common/widgets/layout/grid_layout.dart';
@@ -10,58 +11,13 @@ import '../../../../../utils/constants/constants.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../controllers/category/category_controller.dart';
+import '../../../models/category_model.dart';
+import '../../all_products/all_products.dart';
 import 'category_brands.dart';
 
 class UCategoryTab extends StatelessWidget {
-  const UCategoryTab({super.key});
-
-/*  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: USizes.defaultSpace),
-          child: Column(
-            children: [
-              UBrandShowcase(
-                image: [
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                ],
-              ),
-              UBrandShowcase(
-                image: [
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                ],
-              ),
-              UBrandShowcase(
-                image: [
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                  UImages.accountCreatedImage,
-                ],
-              ),
-              SizedBox(height: USizes.spaceBtwItems),
-
-              USectionHeading(title: 'You might like', onPressed: () {}),
-              UGridLayout(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return UProductCardVertical(product: null);
-                },
-              ),
-              SizedBox(height: USizes.spaceBtwSections)
-            ],
-          ),
-        ),
-      ],
-    );
-  }*/
+  final CategoryModel category;
+  const UCategoryTab({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {

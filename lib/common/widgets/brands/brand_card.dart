@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/features/shop/models/brand_model.dart';
 
 import '../../../utils/constants/constants.dart';
 import '../../../utils/constants/enum.dart';
@@ -9,8 +10,14 @@ import '../texts/brand_title_with_verify_icon.dart';
 
 class UBrandCard extends StatelessWidget {
   final bool showBorder;
+  final BrandModel brand;
+  final VoidCallback onTap;
+
   const UBrandCard({
-    super.key, this.showBorder = true,
+    super.key,
+    this.showBorder = true,
+    required this.brand,
+    required this.onTap,
   });
 
   @override
@@ -22,7 +29,12 @@ class UBrandCard extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Row(
         children: [
-          Flexible(child: URoundedImage(imageUrl: UImages.facebookIcon, backgroundColor: Colors.transparent)),
+          Flexible(
+            child: URoundedImage(
+              imageUrl: UImages.facebookIcon,
+              backgroundColor: Colors.transparent,
+            ),
+          ),
           SizedBox(height: USizes.spaceBtwItems / 2),
           Expanded(
             child: Column(
