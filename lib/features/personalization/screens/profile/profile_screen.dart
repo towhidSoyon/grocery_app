@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_app/common/widgets/texts/section_heading.dart';
+import 'package:grocery_app/data/repositories/authentication/authentication_repository.dart';
 import 'package:grocery_app/features/personalization/screens/address/address.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_menu_tile.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_primary_header.dart';
@@ -56,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: AuthenticationRepository.instance.logout,
                       child: Text('Logout'),
                     ),
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_app/common/style/padding.dart';
 import 'package:grocery_app/common/widgets/button/elevated_button.dart';
+import 'package:grocery_app/features/authentication/controllers/forgot_password/forgot_password_controller.dart';
 import 'package:grocery_app/features/authentication/screens/login/login_screen.dart';
 import 'package:grocery_app/utils/constants/constants.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
@@ -10,10 +11,12 @@ import 'package:grocery_app/utils/constants/texts.dart';
 import 'package:grocery_app/utils/helpers/device_helpers.dart';
 
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
+  final String email;
+  const ResetPassword({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
+    final controller = ForgetPasswordController.instance;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -40,7 +43,7 @@ class ResetPassword extends StatelessWidget {
               ),
               SizedBox(height: USizes.spaceBtwItems),
               Text(
-                'unknownpro@gmail.com',
+                email,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: USizes.spaceBtwItems),
@@ -51,12 +54,12 @@ class ResetPassword extends StatelessWidget {
               ),
               SizedBox(height: USizes.spaceBtwSections),
 
-              UElevatedButton(onPressed: () {}, child: Text(UTexts.done)),
+              UElevatedButton(onPressed: () => Get.offAll(() => LoginScreen()), child: Text(UTexts.done)),
 
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: controller.resendPasswordResetEmail(email),
                   child: Text(UTexts.resendEmail),
                 ),
               ),

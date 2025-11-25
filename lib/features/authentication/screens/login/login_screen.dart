@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_app/common/style/padding.dart';
 import 'package:grocery_app/common/widgets/button/elevated_button.dart';
+import 'package:grocery_app/features/authentication/controllers/login/login_controller.dart';
 import 'package:grocery_app/features/authentication/screens/forgot_password/forgot_password.dart';
 import 'package:grocery_app/features/authentication/screens/signup/sign_up.dart';
-import 'package:grocery_app/navigation_menu.dart';
 import 'package:grocery_app/utils/constants/colors.dart';
 import 'package:grocery_app/utils/constants/constants.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:grocery_app/utils/constants/texts.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
+import 'package:grocery_app/utils/validators/validation.dart';
 import 'package:iconsax/iconsax.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -17,6 +18,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     final dark = UHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(),
@@ -42,65 +44,99 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(height: USizes.spaceBtwSections),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Iconsax.direct_right),
-                      labelText: UTexts.email,
-                    ),
-                  ),
-                  SizedBox(height: USizes.spaceBtwInputFields),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Iconsax.password_check),
-                      labelText: UTexts.password,
-                      suffixIcon: Icon(Iconsax.eye),
-                    ),
-                  ),
-                  SizedBox(height: USizes.spaceBtwInputFields / 2),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(value: true, onChanged: (value) {}),
-                          Text(UTexts.rememberMe),
-                        ],
+              Form(
+                key: controller.loginFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      controller: controller.email,
+                      validator: (value) => UValidator.validateEmail(value),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Iconsax.direct_right),
+                        labelText: UTexts.email,
                       ),
-                      TextButton(
-                        onPressed: () => Get.to( () => ForgotPassword( )),
-                        child: Text(UTexts.forgetPassword),
+                    ),
+                    SizedBox(height: USizes.spaceBtwInputFields),
+                    Obx(
+                      () => TextFormField(
+                        controller: controller.password,
+                        validator: (value) =>
+                            UValidator.validateEmptyText('Password',value),
+                        obscureText: controller.hidePassword.value,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Iconsax.password_check),
+                          labelText: UTexts.password,
+                          suffixIcon: IconButton(
+                            onPressed: () => controller.hidePassword.toggle(),
+                            icon: Icon(
+                              controller.hidePassword.value
+                                  ? Iconsax.eye
+                                  : Iconsax.eye_slash,
+                            ),
+                          ),
+                        ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: USizes.spaceBtwSections),
+                    ),
+                    SizedBox(height: USizes.spaceBtwInputFields / 2),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Obx(
+                              () =>
+                                  Checkbox(value: controller.rememberMe.value, onChanged: (value) => controller.rememberMe.toggle()),
+                            ),
+                            Text(UTexts.rememberMe),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () => Get.to(() => ForgotPassword()),
+                          child: Text(UTexts.forgetPassword),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: USizes.spaceBtwSections),
 
-                  UElevatedButton(onPressed: () => Get.to(() => NavigationMenu()), child: Text(UTexts.signIn)),
-                  SizedBox(height: USizes.spaceBtwItems / 2),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () => Get.to(() => SignUp()),
-                      child: Text(UTexts.createAccount),
+                    UElevatedButton(
+                      onPressed: controller.emailAndPasswordSignIn,
+                      child: Text(UTexts.signIn),
                     ),
-                  ),
-                ],
+                    SizedBox(height: USizes.spaceBtwItems / 2),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () => Get.to(() => SignUpScreen()),
+                        child: Text(UTexts.createAccount),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: USizes.spaceBtwSections),
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Divider(indent: 60, endIndent: 5, thickness: 0.5, color: dark? UColors.darkerGrey : UColors.grey),
+                    child: Divider(
+                      indent: 60,
+                      endIndent: 5,
+                      thickness: 0.5,
+                      color: dark ? UColors.darkerGrey : UColors.grey,
+                    ),
                   ),
                   Text(
                     UTexts.orSignInWith,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   Expanded(
-                    child: Divider(indent: 5, endIndent: 60, thickness: 0.5, color: dark? UColors.darkerGrey : UColors.grey),
+                    child: Divider(
+                      indent: 5,
+                      endIndent: 60,
+                      thickness: 0.5,
+                      color: dark ? UColors.darkerGrey : UColors.grey,
+                    ),
                   ),
                 ],
               ),
@@ -114,7 +150,7 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: controller.googleSignIn,
                       icon: Image.asset(
                         UImages.googleIcon,
                         height: USizes.iconMd,

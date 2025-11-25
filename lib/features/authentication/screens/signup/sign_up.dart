@@ -10,6 +10,7 @@ import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/login_signup/form_divider.dart';
+import '../../../../common/widgets/login_signup/social_buttons.dart';
 import '../../../../utils/constants/constants.dart';
 import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/helper_functions.dart';

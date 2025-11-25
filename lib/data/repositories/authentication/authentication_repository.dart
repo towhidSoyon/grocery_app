@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -93,7 +92,7 @@ class AuthenticationRepository extends GetxController{
   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async{
     try{
       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    } on UFirebaseAuthException catch(e){
+    } on FirebaseAuthException catch(e){
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch(e){
       throw UFirebaseException(e.code).message;
@@ -162,10 +161,27 @@ class AuthenticationRepository extends GetxController{
     }
   }
 
+  Future<void> logout() async{
+    try{
+      await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().signOut();
+      Get.offAll(() => LoginScreen());
+    } on UFirebaseException catch(e){
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch(e){
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch(_){
+      throw const UFormatException();
+    } on PlatformException catch(e){
+      throw UPlatformException(e.code).message;
+    } catch(e){
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
 
   /*---------- Federated identity & social Sign-in --------------------------------*/
 
-/*
   /// [GoogleAuthentication] - GOOGLE
   Future<UserCredential?> signInWithGoogle() async{
     try{
@@ -183,6 +199,7 @@ class AuthenticationRepository extends GetxController{
       // Once the signed in, return the user credential
       return await _auth.signInWithCredential(credential);
 
+
     } on UFirebaseAuthException catch(e){
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch(e){
@@ -196,32 +213,6 @@ class AuthenticationRepository extends GetxController{
       return null;
     }
   }
-*/
-
-
-  /// [FacebookAuthentication] - FACEBOOK
-
-
-/*---------- ./end Federated identity & social Sign-in --------------------------------*/
-
-/*  /// [Logout User] - Valid for any authentication
-  Future<void> logout() async{
-    try{
-      await GoogleSignIn().signOut();
-      await FirebaseAuth.instance.signOut();
-      Get.offAll(()=> const LoginScreen());
-    } on UFirebaseAuthException catch(e){
-      throw UFirebaseAuthException(e.code).message;
-    } on FirebaseException catch(e){
-      throw UFirebaseException(e.code).message;
-    } on FormatException catch(_){
-      throw const UFormatException();
-    } on PlatformException catch(e){
-      throw UPlatformException(e.code).message;
-    } catch(e){
-      throw 'Something went wrong. Please try again';
-    }
-  }*/
 
   /// DELETE USER - Remove user Auth and  Firestore Account
   Future<void> deleteAccount() async{

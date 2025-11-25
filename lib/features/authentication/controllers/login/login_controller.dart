@@ -84,11 +84,11 @@ class LoginController extends GetxController{
         return;
       }
 
-/*      // Google Authentication
+      // Google Authentication
       final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
 
       // Save user Record
-      userController.saveUserRecord(userCredentials);*/
+      userController.saveUserRecord(userCredentials);
 
       // Remove Loader
       UFullScreenLoader.stopLoading();

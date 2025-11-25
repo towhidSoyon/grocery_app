@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:grocery_app/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:grocery_app/utils/constants/colors.dart';
 import 'package:grocery_app/utils/theme/theme.dart';
+
+import 'bindings/general_bindings.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system ,
       theme: UAppTheme.lightTheme,
       darkTheme: UAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       home: Scaffold(
         backgroundColor: UColors.primary,
         body: Center(
