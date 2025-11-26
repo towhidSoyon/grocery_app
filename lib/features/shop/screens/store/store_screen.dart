@@ -26,7 +26,6 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final dark = UHelperFunctions.isDarkMode(context);
     final categories = CategoryController.instance.featuredCategories;
     final brandController = Get.put(BrandController());
@@ -39,87 +38,88 @@ class StoreScreen extends StatelessWidget {
             'Store',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: const [
-            UCartCounterIcon(),
-          ],
+          actions: const [UCartCounterIcon()],
         ),
         body: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    floating: true,
-                    pinned: true,
-                    backgroundColor: dark ? UColors.black : UColors.white,
-                    expandedHeight: 440,
-                    flexibleSpace: Padding(
-                        padding: const EdgeInsets.all(USizes.defaultSpace),
-                        child: ListView(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          children: [
-                            /// Search Appbar
-                            const SizedBox(
-                              height: USizes.spaceBtwItems,
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                floating: true,
+                pinned: true,
+                backgroundColor: dark ? UColors.black : UColors.white,
+                expandedHeight: 440,
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.all(USizes.defaultSpace),
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      /// Search Appbar
+                      const SizedBox(height: USizes.spaceBtwItems),
+                      const USearchContainer(
+                        text: 'Search in Store',
+                        showBorder: true,
+                        showBackground: false,
+                        padding: EdgeInsets.zero,
+                      ),
+                      const SizedBox(height: USizes.spaceBtwSections),
+
+                      /// Featured Brands
+                      USectionHeading(
+                        title: 'Featured Brands',
+                        showActionButton: true,
+                        onPressed: () => Get.to(() => const AllBrandsScreen()),
+                      ),
+                      const SizedBox(height: USizes.spaceBtwItems / 1.5),
+
+                      /// Brand GridView
+                      Obx(() {
+                        if (brandController.isLoading.value) {
+                          return const UBrandsShimmer();
+                        }
+
+                        if (brandController.featuredBrands.isEmpty) {
+                          return Center(
+                            child: Text(
+                              'No Data Found!',
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .apply(color: Colors.white),
                             ),
-                            const USearchContainer(
-                              text: 'Search in Store',
+                          );
+                        }
+
+                        return UGridLayout(
+                          itemCount: brandController.featuredBrands.length,
+                          mainAxisExtent: 80,
+                          itemBuilder: (context, index) {
+                            final brand = brandController.featuredBrands[index];
+                            return UBrandCard(
                               showBorder: true,
-                              showBackground: false,
-                              padding: EdgeInsets.zero,
-                            ),
-                            const SizedBox(
-                              height: USizes.spaceBtwSections,
-                            ),
-
-                            /// Featured Brands
-                            USectionHeading(
-                              title: 'Featured Brands',
-                              showActionButton: true,
-                              onPressed: () => Get.to(() => const AllBrandsScreen()),
-                            ),
-                            const SizedBox(
-                              height: USizes.spaceBtwItems / 1.5,
-                            ),
-
-                            /// Brand GridView
-                            Obx(
-                                    (){
-                                  if(brandController.isLoading.value) return const UBrandsShimmer();
-
-                                  if(brandController.featuredBrands.isEmpty){
-                                    return Center(
-                                      child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),),
-                                    );
-                                  }
-
-                                  return UGridLayout(
-                                    itemCount: brandController.featuredBrands.length,
-                                    mainAxisExtent: 80,
-                                    itemBuilder: (context, index) {
-                                      final brand = brandController.featuredBrands[index];
-                                      return UBrandCard(
-                                        showBorder: true,
-                                        brand: brand,
-                                        onTap: () => Get.to(() => BrandProducts(brand: brand)),
-                                      );
-                                    },
-                                  );
-                                }
-                            ),
-                          ],
-                        )),
-                    bottom: UTabBar(
-                        tabs: categories
-                            .map((category) => Tab(
-                          child: Text(category.name),
-                        ))
-                            .toList())),
-              ];
-            },
-            body: TabBarView(
-              children: categories.map((category) => UCategoryTab(category: category)).toList(),
-            )),
+                              brand: brand,
+                              onTap: () =>
+                                  Get.to(() => BrandProducts(brand: brand)),
+                            );
+                          },
+                        );
+                      }),
+                    ],
+                  ),
+                ),
+                bottom: UTabBar(
+                  tabs: categories
+                      .map((category) => Tab(child: Text(category.name)))
+                      .toList(),
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: categories
+                .map((category) => UCategoryTab(category: category))
+                .toList(),
+          ),
+        ),
       ),
     );
   }

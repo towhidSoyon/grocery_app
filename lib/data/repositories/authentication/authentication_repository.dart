@@ -8,6 +8,11 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:grocery_app/data/repositories/banner/banner_repository.dart';
+import 'package:grocery_app/data/repositories/brand/brand_repository.dart';
+import 'package:grocery_app/data/repositories/categories/category_repository.dart';
+import 'package:grocery_app/dummy_data.dart';
+import 'package:grocery_app/features/personalization/controllers/user_controller.dart';
 import '../../../features/authentication/screens/forgot_password/verify_email.dart';
 import '../../../features/authentication/screens/login/login_screen.dart';
 import '../../../features/authentication/screens/onboarding/onboarding_screen.dart';
@@ -36,6 +41,9 @@ class AuthenticationRepository extends GetxController{
     FlutterNativeSplash.remove();
     // Redirect to the appropriate screen
     screenRedirect();
+    Get.put(CategoryRepository()).uploadDummyCategories(UDummyData.categories);
+    Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
+    Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
   }
 
 
@@ -218,6 +226,9 @@ class AuthenticationRepository extends GetxController{
   Future<void> deleteAccount() async{
     try{
       await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      if(UserController.instance.user.value.publicId.isNotEmpty){
+        UserRepository.instance.deleteProfilePicture(UserController.instance.user.value.publicId);
+      }
       await _auth.currentUser?.delete();
     }on UFirebaseAuthException catch(e){
       throw UFirebaseAuthException(e.code).message;

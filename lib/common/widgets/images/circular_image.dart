@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
+import '../shimmer/shimmer_effect.dart';
 
 class UCircularImage extends StatelessWidget {
   const UCircularImage(
@@ -44,14 +46,14 @@ class UCircularImage extends StatelessWidget {
           border: showBorder ? Border.all(color: borderColor, width: borderWidth) : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
-        child: Image(fit: fit, image:  isNetworkImage ? NetworkImage(image) :AssetImage(image) as ImageProvider)
-    /* ? CachedNetworkImage(
+        child: isNetworkImage ?
+     CachedNetworkImage(
             fit: fit,
             color: overlayColor,
             progressIndicatorBuilder: (context, url, progress) => UShimmerEffect(width: 55, height: 55),
             errorWidget: (context, url, error) => Icon(Icons.error),
             imageUrl: image)
-            : Image(fit: fit, image: AssetImage(image))*/,
+            : Image(fit: fit, image: AssetImage(image)),
       ),
     );
   }

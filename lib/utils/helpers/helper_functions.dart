@@ -7,6 +7,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../constants/colors.dart';
 
@@ -73,7 +74,7 @@ class UHelperFunctions{
     }
   }
 
-/*  /// Function to convert asset to file
+  /// Function to convert asset to file
   static Future<File> assetToFile(String assetPath) async {
     // Load asset bytes
     final byteData = await rootBundle.load(assetPath);
@@ -86,7 +87,7 @@ class UHelperFunctions{
     await file.writeAsBytes(byteData.buffer.asUint8List());
 
     return file;
-  }*/
+  }
 
   static String getFormattedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
     return DateFormat(format).format(date);

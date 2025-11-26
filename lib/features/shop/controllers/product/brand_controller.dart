@@ -32,7 +32,7 @@ class BrandController extends GetxController{
       // Start Loading
       isLoading.value = true;
 
-      final brands = await repository.getAllBrands();
+      final brands = await repository.fetchBrands();
 
       allBrands.assignAll(brands);
 
@@ -49,7 +49,7 @@ class BrandController extends GetxController{
   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async{
     try{
 
-      final brands = await repository.getBrandsForCategory(categoryId);
+      final brands = await repository.fetchBrandsForCategory(categoryId);
       return brands;
 
     }catch(e){

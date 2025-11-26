@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:grocery_app/data/services/cloudinary_services.dart';
+import 'package:grocery_app/utils/constants/keys.dart';
+import 'package:grocery_app/utils/helpers/helper_functions.dart';
 
 import '../../../features/shop/models/brand_category_model.dart';
 import '../../../features/shop/models/category_model.dart';
@@ -10,12 +15,14 @@ import '../../../features/shop/models/product_category_model.dart';
 import '../../../utils/exceptions/firebase_exception.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 import '../../services/firebase_storage_services.dart';
+import 'package:dio/dio.dart' as dio;
 
 class CategoryRepository extends GetxController{
   static CategoryRepository get instance => Get.find();
 
   /// Variables
   final _db = FirebaseFirestore.instance;
+  final _cloudinaryServices = Get.put(CloudinaryServices());
 
 
   @override
@@ -29,8 +36,12 @@ class CategoryRepository extends GetxController{
     try{
 
       final snapshot = await _db.collection("Category").get();
-      final list = snapshot.docs.map((document) => CategoryModel.fromSnapshot(document)).toList();
-      return list;
+      if(snapshot.docs.isNotEmpty){
+        final list = snapshot.docs.map((document) => CategoryModel.fromSnapshot(document)).toList();
+        return list;
+      }
+
+      return [];
 
     } on FirebaseException catch(e){
       throw UFirebaseException(e.code).message;
@@ -66,14 +77,20 @@ class CategoryRepository extends GetxController{
 
       // load through each category
       for(var category in categories){
-        // Get ImageData link from the local assets
+        /*// Get ImageData link from the local assets
         final file = await storage.getImageDataFromAssets(category.image);
 
         // Upload Image and get its url
         final url = await storage.uploadImageData('Category', file, category.name);
 
         // Assign url to Category.image attribute
-        category.image = url;
+        category.image = url;*/
+
+        File image = await UHelperFunctions.assetToFile(category.image);
+        dio.Response response = await _cloudinaryServices.uploadImage(image, UKeys.categoryFolder);
+        if(response.statusCode == 200){
+          category.image = response.data['url'];
+        }
 
         // Storage Category in Firestore
         await _db.collection('Category').doc(category.id).set(category.toJson());

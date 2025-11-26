@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/common/widgets/images/circular_image.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
@@ -26,15 +27,11 @@ class UVerticalImageText extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          UCircularContainer(
+          UCircularImage(
             height: 56,
             width: 56,
-            backgroundColor: backgroundColor ?? (dark ? UColors.dark : UColors.light)  ,
-            padding: EdgeInsets.all(USizes.sm),
-            child: Image(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            ),
+            image: image,
+            isNetworkImage: true,
           ),
           SizedBox(height: USizes.spaceBtwItems / 2),
           SizedBox(

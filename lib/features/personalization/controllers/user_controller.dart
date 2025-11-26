@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -17,6 +19,7 @@ import '../../../utils/popups/full_screen_loader.dart';
 import '../../authentication/models/user_model.dart';
 import '../../authentication/screens/login/login_screen.dart';
 import '../screens/profile/widgets/re_authenticate_user_login_form.dart';
+import 'package:dio/dio.dart' as dio;
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
@@ -184,7 +187,7 @@ class UserController extends GetxController {
     }
   }
 
-  uploadUserProfilePicture() async {
+  /*uploadUserProfilePicture() async {
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
@@ -220,6 +223,49 @@ class UserController extends GetxController {
         message: 'Something went wrong: $e',
       );
     } finally {
+      imageUploading.value = false;
+    }
+  }*/
+
+  Future<void> updateUserProfilePicture() async {
+    try{
+
+      imageUploading.value = true;
+      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery,maxHeight: 512,maxWidth: 512);
+      if(image == null){
+        return;
+      }
+
+      File file = File(image.path);
+
+      if(user.value.publicId.isNotEmpty){
+        await userRepository.deleteProfilePicture(user.value.publicId);
+      }
+
+      dio.Response response =  await userRepository.uploadImage(file);
+
+      if(response.statusCode == 200){
+
+        final data =  response.data;
+        final imageUrl = data['url'];
+        final publicId = data['public_id'];
+
+        await userRepository
+            .updateSingleField({'profilePicture': imageUrl, 'publicId': publicId});
+
+        user.value.profilePicture = imageUrl;
+        user.value.publicId = publicId;
+
+        user.refresh();
+
+        UHelperFunctions.successSnackBar(title: 'Success', message: 'Profile picture updated successfully');
+
+      } else{
+        throw 'Failed to upload profile picture. Please try again';
+      }
+    } catch(e){
+      UHelperFunctions.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    } finally{
       imageUploading.value = false;
     }
   }

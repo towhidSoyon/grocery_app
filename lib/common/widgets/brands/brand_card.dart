@@ -31,7 +31,8 @@ class UBrandCard extends StatelessWidget {
         children: [
           Flexible(
             child: URoundedImage(
-              imageUrl: UImages.facebookIcon,
+              imageUrl: brand.image,
+              isNetworkImage: true,
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -42,11 +43,11 @@ class UBrandCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 UBrandTitleWithVerifyIcon(
-                  title: 'Bata',
+                  title: brand.name,
                   brandTextSize: TextSizes.large,
                 ),
                 Text(
-                  '172 products',
+                  '${brand.productsCount} products',
                   style: Theme.of(context).textTheme.labelMedium,
                   overflow: TextOverflow.ellipsis,
                 ),

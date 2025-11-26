@@ -52,15 +52,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.all(USizes.defaultSpace),
               child: Column(
                 children: [
-                  UPromoSlider(
-                    images: [
-                      UImages.accountCreatedImage,
-                      UImages.accountCreatedImage,
-                      UImages.accountCreatedImage,
-                      UImages.accountCreatedImage,
-                      UImages.accountCreatedImage,
-                    ],
-                  ),
+                  UPromoSlider(),
 
                   SizedBox(height: USizes.spaceBtwSections),
 
