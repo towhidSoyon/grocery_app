@@ -58,14 +58,29 @@ class HomeScreen extends StatelessWidget {
 
                   USectionHeading(
                     title: UTexts.popularCategories,
-                    onPressed: () => Get.to(() => AllProducts(title: UTexts.popularCategories)),
+                    onPressed: () => Get.to(
+                      () => AllProducts(title: UTexts.popularCategories),
+                    ),
                   ),
 
                   SizedBox(height: USizes.spaceBtwSections),
 
-                  UGridLayout(itemCount: 6, itemBuilder: (context, index){
-                    return UProductCardVertical(product: controller.featuredProducts[index]);
-                  })
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(child: Text('Products Not Found'));
+                    }
+                    return UGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (context, index) {
+                        return UProductCardVertical(
+                          product: controller.featuredProducts[index],
+                        );
+                      },
+                    );
+                  }),
 
                   //UProductCardVertical()
                 ],

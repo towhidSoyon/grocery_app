@@ -11,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:grocery_app/data/repositories/banner/banner_repository.dart';
 import 'package:grocery_app/data/repositories/brand/brand_repository.dart';
 import 'package:grocery_app/data/repositories/categories/category_repository.dart';
+import 'package:grocery_app/data/repositories/product_repository.dart';
 import 'package:grocery_app/dummy_data.dart';
 import 'package:grocery_app/features/personalization/controllers/user_controller.dart';
 import '../../../features/authentication/screens/forgot_password/verify_email.dart';
@@ -44,6 +45,7 @@ class AuthenticationRepository extends GetxController{
     Get.put(CategoryRepository()).uploadDummyCategories(UDummyData.categories);
     Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
     Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
+    Get.put(ProductRepository()).uploadDummyProducts(UDummyData.products);
   }
 
 
