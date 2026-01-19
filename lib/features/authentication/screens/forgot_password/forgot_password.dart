@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_app/common/style/padding.dart';
 import 'package:grocery_app/common/widgets/button/elevated_button.dart';
-import 'package:grocery_app/features/authentication/screens/forgot_password/reset_password.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import 'package:grocery_app/utils/validators/validation.dart';

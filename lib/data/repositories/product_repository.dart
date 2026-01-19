@@ -3,14 +3,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:grocery_app/utils/constants/keys.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 
 import '../../features/shop/models/product_model.dart';
-import '../../utils/constants/enum.dart';
 import '../../utils/exceptions/firebase_exception.dart';
 import '../../utils/exceptions/format_exceptions.dart';
 import '../../utils/exceptions/platform_exceptions.dart';
@@ -199,11 +195,15 @@ class ProductRepository extends GetxController {
 
         ///----
 
+        final Map<String, String> uploadedImageMap = {};
+
         File thumbnailFile = await UHelperFunctions.assetToFile(product.thumbnail);
         dio.Response response = await _cloudinaryServices.uploadImage(thumbnailFile, UKeys.productsFolder);
 
         if(response.statusCode == 200){
-          product.thumbnail = response.data['url'];
+          String url = response.data['url'];
+          uploadedImageMap[product.thumbnail] = url;
+          product.thumbnail = url;
         }
 
         if(product.images != null && product.images!.isNotEmpty){
@@ -218,9 +218,24 @@ class ProductRepository extends GetxController {
             }
           }
 
-          for(final variation in product.productVariations!){
-            int index = product.images!.indexWhere((element) => element == variation.image);
+          if(product.productVariations != null && product.productVariations!.isNotEmpty){
+
+            for(int i =0; i< product.images!.length; i++){
+              uploadedImageMap[product.images![i]] = imageUrls[i];
+            }
+
+            for(final variation in product.productVariations!){
+              final match = uploadedImageMap.entries.firstWhere(
+                  (entry) => entry.key == variation.image,
+                orElse: () => const MapEntry('', ''),
+              );
+              if(match.key.isNotEmpty){
+                variation.image = match.value;
+              }
+            }
           }
+
+
 
           product.images!.clear();
           product.images!.assignAll(imageUrls);

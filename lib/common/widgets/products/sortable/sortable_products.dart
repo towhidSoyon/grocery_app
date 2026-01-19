@@ -28,7 +28,7 @@ class USortableProducts extends StatelessWidget {
           decoration: const InputDecoration(
               prefixIcon: Icon(Iconsax.sort)
           ),
-          value: controller.selectedSortOption.value,
+          initialValue: controller.selectedSortOption.value,
           onChanged: (value) {
             // Sort products based on selected option
             controller.sortProducts(value!);
@@ -40,7 +40,7 @@ class USortableProducts extends StatelessWidget {
         const SizedBox(height: USizes.spaceBtwSections,),
 
         /// Gridview
-        Obx(() => UGridLayout(itemCount: controller.products.length, itemBuilder: (context, index) => UProductCardVertical(product: controller.products[index]),))
+        Obx(() => UGridLayout(itemCount: controller.products.length, itemBuilder: (context, index) => UProductCardVertical(product: controller.products[index])))
 
       ],
     );

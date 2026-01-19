@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/common/widgets/images/circular_image.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
-import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
-import '../custom_shapes/circular_container.dart';
 
 class UVerticalImageText extends StatelessWidget {
   final String title, image;

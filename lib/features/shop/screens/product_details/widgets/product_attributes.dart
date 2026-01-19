@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:grocery_app/utils/constants/texts.dart';
 
 import '../../../../../common/widgets/chips/choice_chip.dart';
 import '../../../../../common/widgets/custom_shapes/rounded_container.dart';
@@ -57,7 +57,7 @@ class UProductAttributes extends StatelessWidget {
                               /// Actual Price
                               if(controller.selectedVariation.value.salePrice > 0)
                                 Text(
-                                  '\$${controller.selectedVariation.value.price.toStringAsFixed(0)}',
+                                  '${UTexts.currency}${controller.selectedVariation.value.price.toStringAsFixed(0)}',
                                   style: Theme.of(context).textTheme.titleSmall!.apply(overflow: TextOverflow.ellipsis,decoration: TextDecoration.lineThrough),
                                 ),
                               const SizedBox(

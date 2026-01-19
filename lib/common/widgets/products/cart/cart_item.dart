@@ -37,7 +37,7 @@ class UCartItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               UBrandTitleWithVerifyIcon(title: cartItem.brandName ?? ''),
-              UProductTitleText(title: cartItem.title ?? '', maxLines: 1,),
+              UProductTitleText(title: cartItem.title , maxLines: 1,),
 
               /// Attributes
               Text.rich(

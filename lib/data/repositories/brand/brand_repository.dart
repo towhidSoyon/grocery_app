@@ -14,7 +14,6 @@ import '../../../utils/exceptions/firebase_exception.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 import '../../../utils/helpers/helper_functions.dart';
-import '../../services/firebase_storage_services.dart';
 import 'package:dio/dio.dart' as dio;
 
 class BrandRepository extends GetxController{

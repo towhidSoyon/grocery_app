@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:grocery_app/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:grocery_app/features/shop/controllers/banner/banner_controller.dart';
 import 'package:grocery_app/features/shop/controllers/home/home_controller.dart';

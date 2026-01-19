@@ -38,9 +38,9 @@ class UCouponCode extends StatelessWidget {
             width: 80,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  foregroundColor: dark ? UColors.white.withOpacity(0.5) : UColors.dark.withOpacity(0.5),
-                  backgroundColor: UColors.grey.withOpacity(0.2),
-                  side: BorderSide(color: UColors.grey.withOpacity(0.1))
+                  foregroundColor: dark ? UColors.white.withValues(alpha: 0.5) : UColors.dark.withValues(alpha: 0.5),
+                  backgroundColor: UColors.grey.withValues(alpha: 0.2),
+                  side: BorderSide(color: UColors.grey.withValues(alpha: 0.1))
               ),
               onPressed: (){},
               child: const Text('Apply'),

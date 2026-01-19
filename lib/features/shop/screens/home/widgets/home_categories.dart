@@ -4,12 +4,10 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:grocery_app/features/shop/screens/sub_category/sub_category.dart';
-import 'package:grocery_app/utils/constants/constants.dart';
+
 import '../../../../../common/widgets/image_text/vertical_image_text.dart';
 import '../../../../../common/widgets/shimmer/category_shimmer.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/constants/texts.dart';
 import '../../../controllers/category/category_controller.dart';
 
 class UHomeCategories extends StatelessWidget {

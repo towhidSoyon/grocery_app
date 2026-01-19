@@ -3,7 +3,6 @@ import 'package:grocery_app/features/authentication/screens/forgot_password/veri
 import 'package:grocery_app/features/authentication/screens/signup/sign_up.dart';
 import 'package:grocery_app/features/personalization/screens/address/add_new_address.dart';
 import 'package:grocery_app/features/personalization/screens/edit_profile/edit_profile.dart';
-import 'package:grocery_app/features/shop/screens/brand/brand_products.dart';
 import 'package:grocery_app/features/shop/screens/order/order.dart';
 import 'package:grocery_app/features/shop/screens/wishlist/wishlist_screen.dart';
 import 'package:grocery_app/routes/routes.dart';

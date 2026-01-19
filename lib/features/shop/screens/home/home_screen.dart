@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grocery_app/common/widgets/custom_shapes/primary_header_container.dart';
 import 'package:grocery_app/common/widgets/layout/grid_layout.dart';
-import 'package:grocery_app/features/shop/controllers/home/home_controller.dart';
 import 'package:grocery_app/features/shop/screens/all_products/all_products.dart';
 import 'package:grocery_app/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:grocery_app/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:grocery_app/common/widgets/custom_shapes/primary_header_container.dart';
 import 'package:grocery_app/features/shop/screens/home/widgets/promo_slider.dart';
-import 'package:grocery_app/utils/constants/constants.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:grocery_app/utils/constants/texts.dart';
+
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../common/widgets/text_fields/search_bar.dart';
 import '../../../../common/widgets/texts/section_heading.dart';

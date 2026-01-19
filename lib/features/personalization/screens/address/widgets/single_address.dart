@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconsax/iconsax.dart';
@@ -33,7 +32,7 @@ class USingleAddress extends StatelessWidget {
               padding: const EdgeInsets.all(USizes.md),
               width: double.infinity,
               showBorder: true,
-              backgroundColor: selectedAddress ? UColors.primary.withOpacity(0.5) : Colors.transparent,
+              backgroundColor: selectedAddress ? UColors.primary.withValues(alpha: 0.5) : Colors.transparent,
               borderColor: selectedAddress ? Colors.transparent :
               dark ? UColors.darkerGrey : UColors.grey,
               margin: const EdgeInsets.only(bottom: USizes.spaceBtwItems),

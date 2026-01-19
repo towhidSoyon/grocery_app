@@ -30,7 +30,7 @@ class OrderModel{
 
   String get formattedOrderDate => UHelperFunctions.getFormattedDate(orderDate);
 
-  String get formattedDeliveryDate => UHelperFunctions.getFormattedDate(deliveryDate!) ?? '';
+  String get formattedDeliveryDate => UHelperFunctions.getFormattedDate(deliveryDate!);
 
   String get orderStatusText => status == OrderStatus.delivered
       ? 'Delivered'

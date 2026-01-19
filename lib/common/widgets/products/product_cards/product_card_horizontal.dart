@@ -52,7 +52,7 @@ class UProductCardHorizontal extends StatelessWidget {
                     top: 12,
                     child: URoundedContainer(
                       radius: USizes.sm,
-                      backgroundColor: UColors.primary.withOpacity(0.8),
+                      backgroundColor: UColors.primary.withValues(alpha: 0.8),
                       padding: const EdgeInsets.symmetric(horizontal: USizes.sm, vertical: USizes.xs),
                       child: Text('$salePercentage%', style: Theme.of(context).textTheme.labelLarge!.apply(color: UColors.black),),
                     ),

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:grocery_app/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:grocery_app/features/personalization/controllers/user_controller.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
+
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/products/cart/cart_counter_icon.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/texts.dart';
 
 class UHomeAppBar extends StatelessWidget {
   const UHomeAppBar({super.key});

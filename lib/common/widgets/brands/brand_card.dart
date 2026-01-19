@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/features/shop/models/brand_model.dart';
 
-import '../../../utils/constants/constants.dart';
 import '../../../utils/constants/enum.dart';
 import '../../../utils/constants/sizes.dart';
 import '../custom_shapes/rounded_container.dart';

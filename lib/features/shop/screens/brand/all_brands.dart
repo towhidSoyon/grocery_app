@@ -19,10 +19,7 @@ class AllBrandsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final brandController = BrandController.instance;
     return Scaffold(
-      appBar: const UAppBar(
-        title: Text('Brand'),
-        showBackArrow: true,
-      ),
+      appBar: const UAppBar(title: Text('Brand'), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(USizes.defaultSpace),
@@ -30,35 +27,38 @@ class AllBrandsScreen extends StatelessWidget {
             children: [
               /// Heading
               const USectionHeading(title: 'Brands'),
-              const SizedBox(
-                height: USizes.spaceBtwItems,
-              ),
+              const SizedBox(height: USizes.spaceBtwItems),
 
               /// Brands
-              Obx(
-                      (){
-                    if(brandController.isLoading.value) return const UBrandsShimmer();
+              Obx(() {
+                if (brandController.isLoading.value) {
+                  return const UBrandsShimmer();
+                }
 
-                    if(brandController.allBrands.isEmpty){
-                      return Center(
-                        child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),),
-                      );
-                    }
+                if (brandController.allBrands.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No Data Found!',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium!.apply(color: Colors.white),
+                    ),
+                  );
+                }
 
-                    return UGridLayout(
-                      itemCount: brandController.allBrands.length,
-                      mainAxisExtent: 80,
-                      itemBuilder: (context, index) {
-                        final brand = brandController.allBrands[index];
-                        return UBrandCard(
-                          showBorder: false,
-                          brand: brand,
-                          onTap: () => Get.to(() => BrandProducts(brand: brand,)),
-                        );
-                      },
+                return UGridLayout(
+                  itemCount: brandController.allBrands.length,
+                  mainAxisExtent: 80,
+                  itemBuilder: (context, index) {
+                    final brand = brandController.allBrands[index];
+                    return UBrandCard(
+                      showBorder: false,
+                      brand: brand,
+                      onTap: () => Get.to(() => BrandProducts(brand: brand)),
                     );
-                  }
-              ),
+                  },
+                );
+              }),
             ],
           ),
         ),

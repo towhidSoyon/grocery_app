@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocery_app/data/repositories/authentication/authentication_repository.dart';
 import 'package:grocery_app/features/authentication/controllers/signup/verify_email_controller.dart';
-import 'package:grocery_app/features/authentication/screens/forgot_password/account_created.dart';
 import '../../../../common/style/padding.dart';
 import '../../../../common/widgets/button/elevated_button.dart';
 import '../../../../utils/constants/constants.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/device_helpers.dart';
-import '../login/login_screen.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
   final String email;

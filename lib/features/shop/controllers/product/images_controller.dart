@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -49,7 +50,7 @@ class ImagesController extends GetxController{
             children: [
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: USizes.defaultSpace * 2, horizontal: USizes.defaultSpace),
-                  child: /*CachedNetworkImage(imageUrl: image)*/ Image(image: AssetImage(image))
+                  child: CachedNetworkImage(imageUrl: image)
               ),
               const SizedBox(height: USizes.spaceBtwSections,),
               Align(

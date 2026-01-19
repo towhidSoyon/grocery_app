@@ -5,7 +5,6 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:grocery_app/common/widgets/texts/section_heading.dart';
 import 'package:grocery_app/features/shop/screens/store/widgets/category_tab.dart';
-import 'package:grocery_app/features/shop/screens/store/widgets/store_primary_header_container.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/appbar/tab_bar.dart';
@@ -18,8 +17,8 @@ import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../controllers/category/category_controller.dart';
 import '../../controllers/product/brand_controller.dart';
-import '../brand/brand_products.dart';
 import '../brand/all_brands.dart';
+import '../brand/brand_products.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
