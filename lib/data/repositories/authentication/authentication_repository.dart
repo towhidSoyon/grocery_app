@@ -43,6 +43,8 @@ class AuthenticationRepository extends GetxController{
     // Redirect to the appropriate screen
     screenRedirect();
     Get.put(CategoryRepository()).uploadDummyCategories(UDummyData.categories);
+    Get.put(CategoryRepository()).uploadDummyBrandCategory(UDummyData.brandCategory);
+    Get.put(CategoryRepository()).uploadDummyProductCategory(UDummyData.productCategory);
     Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
     Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
     Get.put(ProductRepository()).uploadDummyProducts(UDummyData.products);
@@ -52,7 +54,7 @@ class AuthenticationRepository extends GetxController{
 
 
   /// Function to show relevant screen
-  screenRedirect() async{
+  Future<void> screenRedirect() async{
     final user = _auth.currentUser;
     if(user != null){
       // if user is logged in
@@ -63,6 +65,8 @@ class AuthenticationRepository extends GetxController{
 
         // if user email is verified , navigate to navigation menu
         Get.offAll(() => const NavigationMenu());
+
+        await GetStorage.init(user.uid);
 
       }else{
         // if user's email is not verified, navigate to the verify email screen

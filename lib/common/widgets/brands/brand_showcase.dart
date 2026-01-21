@@ -1,4 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:grocery_app/common/widgets/shimmer/shimmer_effect.dart';
+import 'package:grocery_app/features/shop/screens/brand/brand_products.dart';
 import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import '../../../features/shop/models/brand_model.dart';
 import '../../../utils/constants/colors.dart';
@@ -15,23 +20,26 @@ class UBrandShowcase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
-    return URoundedContainer(
-      showBorder: true,
-      borderColor: UColors.darkGrey,
-      backgroundColor: Colors.transparent,
-      padding: EdgeInsets.all(USizes.md),
-      margin: EdgeInsets.only(bottom: USizes.spaceBtwItems),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          UBrandCard(showBorder: false, brand: brand, onTap: () {  },),
+    return InkWell(
+      onTap: () => Get.to(() => BrandProducts(brand: brand)),
+      child: URoundedContainer(
+        showBorder: true,
+        borderColor: UColors.darkGrey,
+        backgroundColor: Colors.transparent,
+        padding: EdgeInsets.all(USizes.md),
+        margin: EdgeInsets.only(bottom: USizes.spaceBtwItems),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            UBrandCard(showBorder: false, brand: brand, onTap: () {}),
 
-          Row(
-            children: images
-                .map((image) => buildBrandImage(dark, image))
-                .toList(),
-          ),
-        ],
+            Row(
+              children: images
+                  .map((image) => buildBrandImage(dark, image))
+                  .toList(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -43,7 +51,13 @@ class UBrandShowcase extends StatelessWidget {
         margin: EdgeInsets.only(right: USizes.sm),
         padding: EdgeInsets.all(USizes.md),
         backgroundColor: dark ? UColors.darkGrey : UColors.light,
-        child: Image(image: AssetImage(image), fit: BoxFit.contain),
+        child: CachedNetworkImage(
+          imageUrl: image,
+          fit: BoxFit.contain,
+          progressIndicatorBuilder: (context, url, progress) =>
+              UShimmerEffect(width: 100, height: 100),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
       ),
     );
   }

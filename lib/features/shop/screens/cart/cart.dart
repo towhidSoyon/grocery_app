@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:grocery_app/common/widgets/icons/circular_icon.dart';
 import 'package:grocery_app/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/loaders/animation_loader.dart';
 import '../../../../navigation_menu.dart';
@@ -21,16 +23,19 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
-        title: Text(
-          'Cart',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+        title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
+        actions: [
+          UCircularIcon(
+            icon: Iconsax.box_remove,
+            onPressed: () => controller.clearCart(),
+          ),
+        ],
       ),
       body: Obx(() {
         /// Nothing found widget
         final emptyWidget = UAnimationLoader(
           text: 'Whoops! Cart is empty',
-          animation: UImages.accountCreatedImage,
+          animation: UImages.cartEmptyAnimation,
           showAction: true,
           actionText: "Let's fill it",
           onActionPressed: () => Get.off(() => const NavigationMenu()),
@@ -54,12 +59,16 @@ class CartScreen extends StatelessWidget {
       bottomNavigationBar: controller.cartItems.isEmpty
           ? const SizedBox()
           : Padding(
-        padding: const EdgeInsets.all(USizes.defaultSpace),
-        child: ElevatedButton(
-          onPressed: () => Get.to(() => CheckoutScreen()),
-          child: Obx(() => Text('Checkout \$${controller.totalCartPrice.value}')),
-        ),
-      ),
+              padding: const EdgeInsets.all(USizes.defaultSpace),
+              child: ElevatedButton(
+                onPressed: () => Get.to(() => CheckoutScreen()),
+                child: Obx(
+                  () => Text(
+                    'Checkout \$${controller.totalCartPrice.value.toStringAsFixed(2)}',
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }

@@ -16,12 +16,8 @@ import '../../texts/product_price_text.dart';
 import '../../texts/product_title_text.dart';
 import '../favourite/favourite_icon.dart';
 
-
 class UProductCardVertical extends StatelessWidget {
-  const UProductCardVertical({
-    super.key,
-    required this.product
-  });
+  const UProductCardVertical({super.key, required this.product});
 
   final ProductModel product;
 
@@ -29,7 +25,10 @@ class UProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
     final controller = ProductController.instance;
-    String? salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
+    String? salePercentage = controller.calculateSalePercentage(
+      product.price,
+      product.salePrice,
+    );
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailsScreen(product: product)),
@@ -37,16 +36,17 @@ class UProductCardVertical extends StatelessWidget {
         width: 180,
         padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                spreadRadius: 50,
-                blurRadius: 7,
-                offset: Offset(0, 2)
-              ),
-            ],
-            borderRadius: BorderRadius.circular(USizes.productImageRadius),
-            color: dark ? UColors.darkerGrey : UColors.white),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              spreadRadius: 50,
+              blurRadius: 7,
+              offset: Offset(0, 2),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(USizes.productImageRadius),
+          color: dark ? UColors.darkerGrey : UColors.white,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -58,22 +58,39 @@ class UProductCardVertical extends StatelessWidget {
               child: Stack(
                 children: [
                   /// Thumbnail
-                  Center(child: URoundedImage(imageUrl: product.thumbnail, isNetworkImage: true)),
+                  Center(
+                    child: URoundedImage(
+                      imageUrl: product.thumbnail,
+                      isNetworkImage: true,
+                    ),
+                  ),
 
                   /// Discount Tag
-                  if(salePercentage != null)
+                  if (salePercentage != null)
                     Positioned(
                       top: 12.0,
                       child: URoundedContainer(
                         radius: USizes.sm,
                         backgroundColor: UColors.yellow.withValues(alpha: 0.8),
-                        padding: const EdgeInsets.symmetric(horizontal: USizes.sm, vertical: USizes.xs),
-                        child: Text('$salePercentage%', style: Theme.of(context).textTheme.labelLarge!.apply(color: UColors.black)),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: USizes.sm,
+                          vertical: USizes.xs,
+                        ),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.labelLarge!.apply(color: UColors.black),
+                        ),
                       ),
                     ),
 
                   /// Favourite Button
-                  Positioned(right: 0, top: 0, child: UFavouriteIcon(productId: product.id))
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: UFavouriteIcon(productId: product.id),
+                  ),
                 ],
               ),
             ),
@@ -101,12 +118,17 @@ class UProductCardVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// Product Price
-                Padding(padding: const EdgeInsets.only(left: USizes.sm), child: UProductPriceText(price: controller.getProductPrice(product))),
+                Padding(
+                  padding: const EdgeInsets.only(left: USizes.sm),
+                  child: UProductPriceText(
+                    price: controller.getProductPrice(product),
+                  ),
+                ),
 
                 /// Add Button
-                ProductAddToCartButton(product: product)
+                ProductAddToCartButton(product: product),
               ],
-            )
+            ),
           ],
         ),
       ),
