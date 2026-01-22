@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/sizes.dart';
+import '../../../../../utils/constants/texts.dart';
 import '../../../../../utils/helpers/pricing_calculator.dart';
 import '../../../controllers/product/cart_controller.dart';
 
@@ -18,7 +19,7 @@ class UBillingAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('Subtotal', style: Theme.of(context).textTheme.bodyMedium,),
-            Text('\$$subTotal', style: Theme.of(context).textTheme.bodyMedium,)
+            Text('${UTexts.currency}$subTotal', style: Theme.of(context).textTheme.bodyMedium,)
           ],
         ),
         const SizedBox(height: USizes.spaceBtwItems / 2,),

@@ -13,6 +13,7 @@ class UKeys{
   static const String productId = '';
   static const String bannerCollection = 'Banners';
   static const String brandsCollection = 'Brands';
+  static const String productsCollection = 'Products';
   static const String brandCategoryCollection = 'brandCategory';
 
 

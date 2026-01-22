@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import '../../../../../common/widgets/texts/section_heading.dart';
@@ -22,53 +23,51 @@ class UBillingAddressSection extends StatelessWidget {
           onPressed: () => controller.selectNewAddressPopup(context),
         ),
 
-        controller.selectedAddress.value.id.isNotEmpty ?
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              UTexts.homeAppBarSubTitle,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(
-              height: USizes.spaceBtwItems / 2,
-            ),
-            Row(
+        Obx(() {
+          if (controller.selectedAddress.value.id.isNotEmpty) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(
-                  Icons.phone,
-                  size: 16,
-                  color: Colors.grey,
-                ),
-                const SizedBox(
-                  width: USizes.spaceBtwItems,
-                ),
                 Text(
-                  '+92 317 3766981',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                )
+                  controller.selectedAddress.value.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: USizes.spaceBtwItems / 2),
+                Row(
+                  children: [
+                    const Icon(Icons.phone, size: 16, color: Colors.grey),
+                    const SizedBox(width: USizes.spaceBtwItems),
+                    Text(
+                      controller.selectedAddress.value.phoneNumber,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: USizes.spaceBtwItems / 2),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_history,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: USizes.spaceBtwItems),
+                    Text(
+                      controller.selectedAddress.value.toString().toString(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      softWrap: true,
+                    ),
+                  ],
+                ),
               ],
-            ),
-            const SizedBox(
-              height: USizes.spaceBtwItems / 2,
-            ),
-            Row(children: [
-              const Icon(
-                Icons.location_history,
-                size: 16,
-                color: Colors.grey,
-              ),
-              const SizedBox(
-                width: USizes.spaceBtwItems,
-              ),
-              Text(
-                'South Liana, Maine 87695, USA',
-                style: Theme.of(context).textTheme.bodyMedium,
-                softWrap: true,
-              )
-            ])
-          ],
-        ) : Text('Select Address', style: Theme.of(context).textTheme.bodyMedium,)
+            );
+          } else {
+            return Text(
+              'Select Address',
+              style: Theme.of(context).textTheme.bodyMedium,
+            );
+          }
+        }),
       ],
     );
   }

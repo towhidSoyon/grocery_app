@@ -6,6 +6,7 @@ import 'package:grocery_app/features/personalization/screens/address/address.dar
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_menu_tile.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:grocery_app/features/personalization/screens/profile/widgets/setting_menu_tile.dart';
+import 'package:grocery_app/features/shop/screens/cart/cart.dart';
 import 'package:grocery_app/features/shop/screens/order/order.dart';
 import 'package:grocery_app/utils/constants/sizes.dart';
 import 'package:iconsax/iconsax.dart';
@@ -40,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                   ),
                   SettingMenuTile(
-                    onTap: (){},
+                    onTap: () => Get.to(()=> CartScreen()),
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
                     icon: Iconsax.shopping_cart,

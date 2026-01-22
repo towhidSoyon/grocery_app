@@ -254,4 +254,21 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
+  Future<List<ProductModel>> fetchAllProducts() async{
+    try{
+      final query = await _db.collection(UKeys.productsCollection).get();
+
+      if(query.docs.isNotEmpty){
+        List<ProductModel> products = query.docs.map((document) => ProductModel.fromSnapshot(document)).toList();
+        return products;
+
+      }
+
+      return [];
+
+    } catch(e){
+      throw 'Something went wrong.';
+    }
+  }
 }
