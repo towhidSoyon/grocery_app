@@ -24,21 +24,25 @@ class UHomeCategories extends StatelessWidget {
         return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),),);
       }else{
         return SizedBox(
-          height: 80,
-          child: ListView.builder(
-            shrinkWrap: true,
+          height: 90,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
             itemCount: controller.featuredCategories.length,
+            separatorBuilder: (_, __) => SizedBox(width: 12),
             itemBuilder: (context, index) {
               final category = controller.featuredCategories[index];
               return UVerticalImageText(
                 image: category.image,
                 title: category.name,
-                onTap: () => Get.to(() => SubCategoriesScreen(category: category)), textColor: UColors.white,
+                textColor: UColors.white,
+                onTap: () =>
+                    Get.to(() => SubCategoriesScreen(category: category)),
               );
             },
           ),
         );
+
       }
 
     });

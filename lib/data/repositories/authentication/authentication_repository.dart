@@ -36,7 +36,7 @@ class AuthenticationRepository extends GetxController{
 
 
   /// Called from main.dart on app launch
-  @override
+  /*@override
   void onReady() {
     // Remove the splash screen
     FlutterNativeSplash.remove();
@@ -48,7 +48,36 @@ class AuthenticationRepository extends GetxController{
     Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
     Get.put(BrandRepository()).uploadBrands(UDummyData.brands);
     Get.put(ProductRepository()).uploadDummyProducts(UDummyData.products);
+  }*/
+
+  @override
+  Future<void> onReady() async {
+    super.onReady();
+    FlutterNativeSplash.remove();
+
+    await screenRedirect();
+
+    Future.microtask(() async {
+      try {
+        //final categoryRepo = Get.put(CategoryRepository(), permanent: true);
+        //final bannerRepo   = Get.put(BannerRepository(), permanent: true);
+        final brandRepo    = Get.put(BrandRepository(), permanent: true);
+        //final productRepo  = Get.put(ProductRepository(), permanent: true);
+
+        //await categoryRepo.uploadDummyCategories(UDummyData.categories);
+        //await categoryRepo.uploadDummyBrandCategory(UDummyData.brandCategory);
+        //await categoryRepo.uploadDummyProductCategory(UDummyData.productCategory);
+        //await bannerRepo.uploadBanners(UDummyData.banner);
+        await brandRepo.uploadBrands(UDummyData.brands);
+        //await productRepo.uploadDummyProducts(UDummyData.products);
+
+        print("🔥 ALL UPLOADED");
+      } catch (e) {
+        print("ERROR: $e");
+      }
+    });
   }
+
 
 
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/sizes.dart';
@@ -44,9 +45,9 @@ class URoundedImage extends StatelessWidget {
         ),
         child: ClipRRect(
             borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
-            child: /*isNetworkImage
+            child: isNetworkImage
                 ? CachedNetworkImage(imageUrl: imageUrl, errorWidget: (context, url, error) => Icon(Icons.error))
-                :*/ Image(image: AssetImage(imageUrl), fit: fit)),
+                : Image(image: AssetImage(imageUrl), fit: fit)),
       ),
     );
   }

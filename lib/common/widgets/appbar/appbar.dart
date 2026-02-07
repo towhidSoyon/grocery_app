@@ -31,7 +31,7 @@ class UAppBar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         leading: showBackArrow
             ? IconButton(
-          onPressed: Get.back,
+          onPressed: leadingOnPressed ?? () => Get.back(),
           icon: Icon(
             Iconsax.arrow_left,
             color: dark ? UColors.white : UColors.dark,

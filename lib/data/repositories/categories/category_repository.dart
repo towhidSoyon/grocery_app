@@ -100,8 +100,10 @@ class CategoryRepository extends GetxController{
       throw UFirebaseException(e.code).message;
     } on PlatformException catch(e){
       throw UPlatformException(e.code).message;
-    } catch(e){
-      throw 'Something went wrong. Please try again';
+    } catch (e, stack) {
+      print("🔥 REAL ERROR: $e");
+      print(stack);
+      rethrow;
     }
   }
 

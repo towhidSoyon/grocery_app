@@ -5,6 +5,7 @@ import 'package:grocery_app/utils/helpers/helper_functions.dart';
 import 'package:iconsax/iconsax.dart';
 import 'features/personalization/screens/profile/profile_screen.dart';
 import 'features/shop/screens/home/home_screen.dart';
+import 'features/shop/screens/store/store_screen.dart';
 import 'features/shop/screens/wishlist/wishlist_screen.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -44,5 +45,5 @@ class NavigationController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
 
-  List<Widget> screens = [HomeScreen(), HomeScreen(), FavouriteScreen(), ProfileScreen()];
+  List<Widget> screens = [HomeScreen(), StoreScreen(), FavouriteScreen(), ProfileScreen()];
 }

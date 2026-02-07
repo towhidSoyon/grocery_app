@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -51,5 +52,66 @@ class NetworkManager extends GetxController {
   void onClose() {
     super.onClose();
     _connectivitySubscription.cancel();
+  }
+}*/
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+
+import 'helper_functions.dart';
+
+class NetworkManager extends GetxController {
+  static NetworkManager get instance => Get.find();
+
+  final Connectivity _connectivity = Connectivity();
+
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
+
+  final Rx<ConnectivityResult> _connectionStatus =
+      ConnectivityResult.none.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  /// Update connection status
+  Future<void> _updateConnectionStatus(
+      List<ConnectivityResult> results) async {
+    final isConnected = results.any(
+          (result) => result != ConnectivityResult.none,
+    );
+
+    _connectionStatus.value =
+    isConnected ? results.first : ConnectivityResult.none;
+
+    if (!isConnected) {
+      UHelperFunctions.warningSnackBar(
+        title: 'No Internet Connection',
+      );
+    }
+  }
+
+  /// Check internet connection status
+  Future<bool> isConnected() async {
+    try {
+      final results = await _connectivity.checkConnectivity();
+      return results.any(
+            (result) => result != ConnectivityResult.none,
+      );
+    } on PlatformException {
+      return false;
+    }
+  }
+
+  @override
+  void onClose() {
+    _connectivitySubscription.cancel();
+    super.onClose();
   }
 }

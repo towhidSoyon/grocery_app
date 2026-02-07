@@ -13,6 +13,7 @@ import '../../../../common/widgets/products/product_cards/product_card_vertical.
 import '../../../../common/widgets/text_fields/search_bar.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/helpers/helper_functions.dart';
+import '../../controllers/home/home_controller.dart';
 import '../../controllers/product/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
     final dark = UHelperFunctions.isDarkMode(context);
-    //final controller = Get.put(HomeController());
+    final homeController = Get.put(HomeController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

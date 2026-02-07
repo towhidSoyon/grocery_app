@@ -24,6 +24,7 @@ class UVerticalImageText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           UCircularImage(
             height: 56,
@@ -36,6 +37,7 @@ class UVerticalImageText extends StatelessWidget {
             width: 55,
             child: Text(
               title,
+              maxLines: 1,
               style: Theme.of(context).textTheme.labelMedium!.apply(
                 color: textColor,
                 overflow: TextOverflow.ellipsis,

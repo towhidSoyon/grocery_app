@@ -24,7 +24,7 @@ class BrandRepository extends GetxController{
   final _cloudinaryServices = Get.put(CloudinaryServices());
 
 
-  /// [Upload] - Function to upload all brands
+/*  /// [Upload] - Function to upload all brands
   Future<void> uploadBrands(List<BrandModel> brands) async {
     try{
 
@@ -54,7 +54,51 @@ class BrandRepository extends GetxController{
     } catch(e){
       throw 'Something went wrong. Please try again';
     }
+  }*/
+
+  Future<void> uploadBrands(List<BrandModel> brands) async {
+    try {
+      for (BrandModel brand in brands) {
+        String imageUrl = brand.image;
+
+        print("Uploading brand: ${brand.name}");
+        print("Image path: ${brand.image}");
+
+        // 🔥 If image is local asset → upload
+        if (!brand.image.startsWith('http')) {
+          File brandImage = await UHelperFunctions.assetToFile(brand.image);
+
+          dio.Response response =
+          await _cloudinaryServices.uploadImage(brandImage, UKeys.brandsFolder);
+
+          if (response.statusCode == 200) {
+            imageUrl = response.data['url'];
+          }
+        }
+
+        // save final url
+        brand.image = imageUrl;
+
+        await _db
+            .collection(UKeys.brandsCollection)
+            .doc(brand.id)
+            .set(brand.toJson());
+
+        print("✅ Uploaded brand: ${brand.name}");
+      }
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e, s) {
+      print("❌ BRAND UPLOAD ERROR: $e");
+      print(s);
+      throw e.toString();
+    }
   }
+
 
 
   /// [Fetch] - Function to get all brands

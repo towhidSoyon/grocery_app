@@ -50,7 +50,7 @@ class USignUpForm extends StatelessWidget {
           TextFormField(
             validator: (value) => UValidator.validateEmptyText('Username', value),
             controller: controller.username,
-            decoration: InputDecoration(labelText: UTexts.termsOfUse, prefixIcon: Icon(Iconsax.user_edit)),
+            decoration: InputDecoration(labelText: 'Username', prefixIcon: Icon(Iconsax.user_edit)),
           ),
           const SizedBox(height: USizes.spaceBtwInputFields,),
 
